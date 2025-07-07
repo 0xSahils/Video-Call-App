@@ -1,13 +1,12 @@
-import express from "express";
 import { generateStreamToken } from "../lib/stream.js";
 
 export async function getStreamToken(req, res) {
   try {
-    const token = generateStreamToken(eq.user.id);
+    const token = generateStreamToken(req.user.id);
 
     res.status(200).json({ token });
   } catch (error) {
-    console.error("Error generating stream token:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.log("Error in getStreamToken controller:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 }

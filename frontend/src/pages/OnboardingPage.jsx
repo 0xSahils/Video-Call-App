@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import useAuthUser from "../hooks/useAuthUser";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
 import { completeOnboarding } from "../lib/api";
 import {
-  CameraIcon,
   LoaderIcon,
   MapPinIcon,
   ShipWheelIcon,
@@ -32,9 +27,10 @@ const OnboardingPage = () => {
   const { mutate: onboardingMutation, isPending } = useMutation({
     mutationFn: completeOnboarding,
     onSuccess: () => {
-      toast.success("Profile onboarded successfully"),
-        queryClient.invalidateQueries({ queryKey: ["authUser"] });
+      toast.success("Profile onboarded successfully");
+      queryClient.invalidateQueries({ queryKey: ["authUser"] });
     },
+
     onError: (error) => {
       toast.error(error.response.data.message);
     },
@@ -42,6 +38,7 @@ const OnboardingPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     onboardingMutation(formState);
   };
 
@@ -127,7 +124,7 @@ const OnboardingPage = () => {
 
             {/* LANGUAGES */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/*Native language*/}
+              {/* NATIVE LANGUAGE */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Native Language</span>
@@ -151,7 +148,8 @@ const OnboardingPage = () => {
                   ))}
                 </select>
               </div>
-              {/* LEARNING LANGIAGE */}
+
+              {/* LEARNING LANGUAGE */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Learning Language</span>
@@ -222,5 +220,4 @@ const OnboardingPage = () => {
     </div>
   );
 };
-
 export default OnboardingPage;
