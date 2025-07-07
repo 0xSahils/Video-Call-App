@@ -1,7 +1,7 @@
 import { upsertStreamUser } from "../lib/stream.js";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
-import { sendVerificationEmail } from "../lib/mailer.js";
+// import { sendVerificationEmail } from "../lib/mailer.js";
 
 export async function signup(req, res) {
   const { email, password, fullName } = req.body;
@@ -72,33 +72,6 @@ export async function signup(req, res) {
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
-
-// export async function verifyEmail(req, res) {
-//   const { token } = req.query;
-
-//   try {
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-
-//     const user = await User.findById(decoded.userId);
-//     if (!user) {
-//       return res.status(400).json({ message: "Invalid verification link" });
-//     }
-
-//     if (user.isVerified) {
-//       return res.status(400).json({ message: "Email already verified" });
-//     }
-
-//     user.isVerified = true;
-//     await user.save();
-
-//     res
-//       .status(200)
-//       .json({ success: true, message: "Email verified successfully" });
-//   } catch (error) {
-//     console.log("Error verifying email:", error);
-//     res.status(400).json({ message: "Invalid or expired verification token" });
-//   }
-// }
 
 export async function login(req, res) {
   try {
