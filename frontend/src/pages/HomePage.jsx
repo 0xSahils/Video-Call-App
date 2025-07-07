@@ -14,7 +14,7 @@ import {
   UsersIcon,
 } from "lucide-react";
 
-import { capitialize } from "../lib/utils";
+import { capitalize } from "../lib/utils";
 
 import FriendCard, { getLanguageFlag } from "../components/FriendCard";
 import NoFriendsFound from "../components/NoFriendsFound";
@@ -142,11 +142,11 @@ const HomePage = () => {
                       <div className="flex flex-wrap gap-1.5">
                         <span className="badge badge-secondary">
                           {getLanguageFlag(user.nativeLanguage)}
-                          Native: {capitialize(user.nativeLanguage)}
+                          Native: {capitalize(user.nativeLanguage)}
                         </span>
                         <span className="badge badge-outline">
                           {getLanguageFlag(user.learningLanguage)}
-                          Learning: {capitialize(user.learningLanguage)}
+                          Learning: {capitalize(user.learningLanguage)}
                         </span>
                       </div>
 
